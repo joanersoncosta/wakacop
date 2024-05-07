@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /wakacop/api
+    context-path: /wakacop
     
 spring:
   datasource:
