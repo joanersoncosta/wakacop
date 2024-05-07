@@ -1,10 +1,7 @@
 package academy.wakanda.wakacop.sessaovotacao.application.api;
 
-import javax.validation.Valid;
-
 import org.springframework.web.bind.annotation.RestController;
 
-import academy.wakanda.wakacop.pauta.application.api.response.PautaCadastradaResponse;
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.SessaoAberturarequest;
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.SessaoAberturaResponse;
 import academy.wakanda.wakacop.sessaovotacao.application.service.SessaovotacaService;
