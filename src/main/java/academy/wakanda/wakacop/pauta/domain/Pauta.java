@@ -9,12 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import academy.wakanda.wakacop.pauta.application.api.request.NovaPautaRequest;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @Entity
 @ToString
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Pauta {
 
 	@Id
@@ -25,4 +29,13 @@ public class Pauta {
 	private String descricao;
 	private UUID idAssociadoAutor;
 	private LocalDateTime dataCriacao;
+	
+	public Pauta(NovaPautaRequest novaPauta) {
+		this.titulo = novaPauta.getTitulo();
+		this.descricao = novaPauta.getDescricao();
+		this.idAssociadoAutor = novaPauta.getIdAssociadoAutor();
+		this.dataCriacao = LocalDateTime.now();
+	}
+	
+	
 }
