@@ -1,5 +1,7 @@
 package academy.wakanda.wakacop.pauta.infra;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Repository;
 
 import academy.wakanda.wakacop.pauta.application.repository.PautaRepsitory;
@@ -18,6 +20,15 @@ public class PautaInfraRepository implements PautaRepsitory {
 		log.info("[start] PautaInfraRepository - salva");
 		pautaSpringDataJPARepository.save(pauta);
 		log.info("[finish] PautaInfraRepository - salva");
+		return pauta;
+	}
+
+	@Override
+	public Pauta buscaPautaporId(UUID idPauta) {
+		log.info("[start] PautaInfraRepository - buscaPautaporId");
+		Pauta pauta = pautaSpringDataJPARepository.findById(idPauta)
+				.orElseThrow(() -> new RuntimeException("Pauta não encontrada!"));
+		log.info("[finish] PautaInfraRepository - buscaPautaporId");
 		return pauta;
 	}
 

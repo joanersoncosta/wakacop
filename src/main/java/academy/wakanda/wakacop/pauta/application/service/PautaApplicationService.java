@@ -1,5 +1,7 @@
 package academy.wakanda.wakacop.pauta.application.service;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import academy.wakanda.wakacop.pauta.application.api.request.NovaPautaRequest;
@@ -22,6 +24,15 @@ public class PautaApplicationService implements PautaService {
 		Pauta pauta = pautaRepsitory.salva(new Pauta(novaPauta));
 		log.info("[finaliza] PautaApplicationService - cadastraPauta");
 		return new PautaCadastradaResponse(pauta);
+	}
+
+	@Override
+	public Pauta getPautaPorId(UUID idPauta) {
+		log.info("[inicia] PautaApplicationService - getPautaPorId");
+		log.info("[idPauta] {}", idPauta);
+		Pauta pauta = pautaRepsitory.buscaPautaporId(idPauta);
+		log.info("[finaliza] PautaApplicationService - getPautaPorId");
+		return pauta;
 	}
 
 }
