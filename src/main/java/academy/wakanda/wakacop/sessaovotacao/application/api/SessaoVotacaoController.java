@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.SessaoAberturarequest;
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.VotoRequest;
+import academy.wakanda.wakacop.sessaovotacao.application.api.response.ResultadoSessaoVotacao;
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.SessaoAberturaResponse;
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.VotoResponse;
 import academy.wakanda.wakacop.sessaovotacao.application.service.SessaovotacaService;
@@ -33,5 +34,14 @@ public class SessaoVotacaoController implements SessaovotacaoAPI {
 		VotoResponse votoResponse = sessaovotacaService.recebeVoto(idSessao, votoRequest);
 		log.info("[finish] SessaoVotacaoController - recebeVoto");
 		return votoResponse;
+	}
+
+	@Override
+	public ResultadoSessaoVotacao obtemResultado(UUID idSessao) {
+		log.info("[start] SessaoVotacaoController - obtemResultado");
+		log.info("[idSessao] {}", idSessao);
+		ResultadoSessaoVotacao resultadoSessaoVotacao = sessaovotacaService.obtemResultado(idSessao);
+		log.info("[finish] SessaoVotacaoController - obtemResultado");
+		return resultadoSessaoVotacao;
 	}
 }

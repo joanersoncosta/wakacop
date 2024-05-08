@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.SessaoAberturarequest;
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.VotoRequest;
+import academy.wakanda.wakacop.sessaovotacao.application.api.response.ResultadoSessaoVotacao;
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.SessaoAberturaResponse;
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.VotoResponse;
 
@@ -28,4 +30,8 @@ public interface SessaovotacaoAPI {
 	@PostMapping("/{idSessao}/voto")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public VotoResponse recebeVoto(@PathVariable UUID  idSessao, @RequestBody @Valid VotoRequest votoRequest);
+
+	@GetMapping("/{idSessao}/resultado")
+	@ResponseStatus(code = HttpStatus.OK)
+	public ResultadoSessaoVotacao obtemResultado(@PathVariable UUID  idSessao);
 }

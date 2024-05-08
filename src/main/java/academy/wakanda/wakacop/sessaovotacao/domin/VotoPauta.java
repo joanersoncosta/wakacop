@@ -42,11 +42,15 @@ public class VotoPauta {
 	}
 
 	public UUID getIdSessao() {
-		return this.sessaoVotacao.getIdSessaoVotacao();
+		return this.sessaoVotacao.getIdSessao();
 	}
 	
 	public String getIdCpfAssociado() {
 		return this.cpfAssociado;
+	}
+	
+	public boolean opcaoIgual(OpcaoVoto opcao) {
+		return this.opcaoVoto.equals(opcao);
 	}
 
 }

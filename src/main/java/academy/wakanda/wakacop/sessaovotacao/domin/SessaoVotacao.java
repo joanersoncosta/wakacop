@@ -20,6 +20,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import academy.wakanda.wakacop.pauta.domain.Pauta;
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.SessaoAberturarequest;
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.VotoRequest;
+import academy.wakanda.wakacop.sessaovotacao.application.api.response.ResultadoSessaoVotacao;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +35,7 @@ public class SessaoVotacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", updatable = false, unique = true, nullable = false)
-	private UUID idSessaoVotacao;
+	private UUID idSessao;
 	private UUID idPauta;
 	private Integer tempoDuracao;
 	private StatusSessaoVotacao status;
@@ -54,7 +55,7 @@ public class SessaoVotacao {
 		this.status = StatusSessaoVotacao.ABERTA;
 		this.votos = new HashMap<>();
 	}
-
+	
 	public VotoPauta recebeVoto(VotoRequest votoRequest) {
 		validaSessaoAberta();
 		validaAssociado(votoRequest.getCpfAssociado());
@@ -84,7 +85,30 @@ public class SessaoVotacao {
 
 	private void validaAssociado(String cpfAssociado) {
 		if (votos.containsKey(cpfAssociado)) {
-			new RuntimeException("Associado Já Votou nessa Sessão!");
+			throw new RuntimeException("Associado Já Votou nessa Sessão!");
 		}
+	}
+	
+	public ResultadoSessaoVotacao obtemResultado(){
+		atualizaStatus();
+		return new ResultadoSessaoVotacao(this);
+	}
+
+	public Long getTotalVotos() {
+		return Long.valueOf(this.votos.size());
+	}
+	
+	public Long getTotalSim() {
+		return calculaVotosPorOpcao(OpcaoVoto.SIM);
+	}
+	
+	public Long getTotalNao() {
+		return calculaVotosPorOpcao(OpcaoVoto.NAO);
+	}
+
+	private Long calculaVotosPorOpcao(OpcaoVoto opcao) {
+		return this.votos.values().stream()
+				.filter(voto -> voto.opcaoIgual(opcao))
+				.count();
 	}
 }

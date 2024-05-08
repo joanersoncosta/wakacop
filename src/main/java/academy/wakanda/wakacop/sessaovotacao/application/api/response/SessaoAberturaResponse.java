@@ -12,7 +12,7 @@ public class SessaoAberturaResponse {
 	private UUID idSesao;
 	
 	public SessaoAberturaResponse(SessaoVotacao sessaoVotacao) {
-		this.idSesao = sessaoVotacao.getIdSessaoVotacao();
+		this.idSesao = sessaoVotacao.getIdSessao();
 	}
 
 }
