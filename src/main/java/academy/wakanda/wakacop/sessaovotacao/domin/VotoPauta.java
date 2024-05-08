@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import academy.wakanda.wakacop.sessaovotacao.application.api.request.votoRequest;
+import academy.wakanda.wakacop.sessaovotacao.application.api.request.VotoRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,11 +34,19 @@ public class VotoPauta {
 	private OpcaoVoto opcaoVoto;
 	private LocalDateTime momentoVoto;
 
-	public VotoPauta(SessaoVotacao sessaoVotacao, votoRequest VotoRequest) {
+	public VotoPauta(SessaoVotacao sessaoVotacao, VotoRequest VotoRequest) {
 		this.sessaoVotacao = sessaoVotacao;
 		this.cpfAssociado = VotoRequest.getCpfAssociado();
 		this.opcaoVoto = VotoRequest.getOpcaoVoto();
 		this.momentoVoto = LocalDateTime.now();
+	}
+
+	public UUID getIdSessao() {
+		return this.sessaoVotacao.getIdSessaoVotacao();
+	}
+	
+	public String getIdCpfAssociado() {
+		return this.cpfAssociado;
 	}
 
 }

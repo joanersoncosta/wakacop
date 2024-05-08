@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class votoRequest {
+public class VotoRequest {
 	private String cpfAssociado;
 	private OpcaoVoto opcaoVoto;
 }

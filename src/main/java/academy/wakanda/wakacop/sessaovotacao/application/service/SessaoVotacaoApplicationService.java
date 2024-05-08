@@ -1,13 +1,18 @@
 package academy.wakanda.wakacop.sessaovotacao.application.service;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import academy.wakanda.wakacop.pauta.application.service.PautaService;
 import academy.wakanda.wakacop.pauta.domain.Pauta;
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.SessaoAberturarequest;
+import academy.wakanda.wakacop.sessaovotacao.application.api.request.VotoRequest;
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.SessaoAberturaResponse;
+import academy.wakanda.wakacop.sessaovotacao.application.api.response.VotoResponse;
 import academy.wakanda.wakacop.sessaovotacao.application.repository.SessaoVotacaoRepsitory;
 import academy.wakanda.wakacop.sessaovotacao.domin.SessaoVotacao;
+import academy.wakanda.wakacop.sessaovotacao.domin.VotoPauta;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -20,11 +25,21 @@ public class SessaoVotacaoApplicationService implements SessaovotacaService {
 
 	@Override
 	public SessaoAberturaResponse abreSessao(SessaoAberturarequest sessaoRequest) {
-		log.info("[inicia] SessaoVotacaoApplicationService - abreSessao");
+		log.info("[start] SessaoVotacaoApplicationService - abreSessao");
 		Pauta pauta = PautaService.getPautaPorId(sessaoRequest.getIdPauta());
 		SessaoVotacao sessaoVotacao = sessaoVotacaoRepsitory.salva(new SessaoVotacao(sessaoRequest, pauta));
-		log.info("[finaliza] SessaoVotacaoApplicationService - abreSessao");
+		log.info("[finish] SessaoVotacaoApplicationService - abreSessao");
 		return new SessaoAberturaResponse(sessaoVotacao);
+	}
+
+	@Override
+	public VotoResponse recebeVoto(UUID idSessao, VotoRequest novoVoto) {
+		log.info("[start] SessaoVotacaoApplicationService - recebeVoto");
+		SessaoVotacao sessao = sessaoVotacaoRepsitory.buscaSessaoPorId(idSessao);
+		VotoPauta voto = sessao.recebeVoto(novoVoto);
+		sessaoVotacaoRepsitory.salva(sessao);
+		log.info("[finish] SessaoVotacaoApplicationService - recebeVoto");
+		return new VotoResponse(voto);
 	}
 
 }

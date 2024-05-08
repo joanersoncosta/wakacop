@@ -19,7 +19,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import academy.wakanda.wakacop.pauta.domain.Pauta;
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.SessaoAberturarequest;
-import academy.wakanda.wakacop.sessaovotacao.application.api.request.votoRequest;
+import academy.wakanda.wakacop.sessaovotacao.application.api.request.VotoRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,8 +38,8 @@ public class SessaoVotacao {
 	private UUID idPauta;
 	private Integer tempoDuracao;
 	private StatusSessaoVotacao status;
-	private LocalDateTime dataAbertura;
-	private LocalDateTime dataEncerramento;
+	private LocalDateTime momentoAbertura;
+	private LocalDateTime momentoEncerramento;
 	
 	@OneToMany(mappedBy = "sessaoVotacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -49,17 +49,18 @@ public class SessaoVotacao {
 	public SessaoVotacao(SessaoAberturarequest sessaoAberturarequest, Pauta pauta) {
 		this.idPauta = pauta.getIdPauta();
 		this.tempoDuracao = sessaoAberturarequest.getTempoDuracao().orElse(1);
-		this.dataAbertura = LocalDateTime.now();
-		this.dataEncerramento = dataAbertura.plusMinutes(this.tempoDuracao);
+		this.momentoAbertura = LocalDateTime.now();
+		this.momentoEncerramento = momentoAbertura.plusMinutes(this.tempoDuracao);
 		this.status = StatusSessaoVotacao.ABERTA;
 		this.votos = new HashMap<>();
 	}
 
-	public void recebeVoto(votoRequest votoRequest) {
+	public VotoPauta recebeVoto(VotoRequest votoRequest) {
 		validaSessaoAberta();
 		validaAssociado(votoRequest.getCpfAssociado());
 		VotoPauta voto = new VotoPauta(this, votoRequest);
 		votos.put(votoRequest.getCpfAssociado(), voto);
+		return voto;
 	}
 
 	private void validaSessaoAberta() {
@@ -71,7 +72,7 @@ public class SessaoVotacao {
 
 	private void atualizaStatus() {
 		if(this.status.equals(StatusSessaoVotacao.ABERTA)) {
-			if(LocalDateTime.now().isAfter(dataEncerramento)) {
+			if(LocalDateTime.now().isAfter(momentoEncerramento)) {
 				fechaSessao();
 			}
 		}
