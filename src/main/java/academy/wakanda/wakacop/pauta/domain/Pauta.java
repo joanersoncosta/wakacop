@@ -27,6 +27,7 @@ public class Pauta {
 	private UUID idPauta;
 	private String titulo;
 	private String descricao;
+	@Column(columnDefinition = "uuid", updatable = false, nullable = false)
 	private UUID idAssociadoAutor;
 	private LocalDateTime dataCriacao;
 	
@@ -36,6 +37,5 @@ public class Pauta {
 		this.idAssociadoAutor = novaPauta.getIdAssociadoAutor();
 		this.dataCriacao = LocalDateTime.now();
 	}
-	
 	
 }

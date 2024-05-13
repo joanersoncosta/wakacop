@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import academy.wakanda.wakacop.associado.application.service.AssociadoService;
 import academy.wakanda.wakacop.pauta.domain.Pauta;
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.SessaoAberturarequest;
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.VotoRequest;
@@ -56,9 +57,9 @@ public class SessaoVotacao {
 		this.votos = new HashMap<>();
 	}
 	
-	public VotoPauta recebeVoto(VotoRequest votoRequest) {
+	public VotoPauta recebeVoto(VotoRequest votoRequest, AssociadoService associadoService) {
 		validaSessaoAberta();
-		validaAssociado(votoRequest.getCpfAssociado());
+		validaAssociado(votoRequest.getCpfAssociado(), associadoService);
 		VotoPauta voto = new VotoPauta(this, votoRequest);
 		votos.put(votoRequest.getCpfAssociado(), voto);
 		return voto;
@@ -83,7 +84,12 @@ public class SessaoVotacao {
 		this.status = StatusSessaoVotacao.FECHADA;
 	}
 
-	private void validaAssociado(String cpfAssociado) {
+	private void validaAssociado(String cpfAssociado, AssociadoService associadoService) {
+		associadoService.validaAssociadoAptoVoto(cpfAssociado);
+		validaVotoDuplicado(cpfAssociado);
+	}
+
+	private void validaVotoDuplicado(String cpfAssociado) {
 		if (votos.containsKey(cpfAssociado)) {
 			throw new RuntimeException("Associado Já Votou nessa Sessão!");
 		}

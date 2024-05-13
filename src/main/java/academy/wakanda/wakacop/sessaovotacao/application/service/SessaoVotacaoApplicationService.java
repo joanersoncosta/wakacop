@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import academy.wakanda.wakacop.associado.application.service.AssociadoService;
 import academy.wakanda.wakacop.pauta.application.service.PautaService;
 import academy.wakanda.wakacop.pauta.domain.Pauta;
 import academy.wakanda.wakacop.sessaovotacao.application.api.request.SessaoAberturarequest;
@@ -23,6 +24,7 @@ import lombok.extern.log4j.Log4j2;
 public class SessaoVotacaoApplicationService implements SessaovotacaService {
 	private final SessaoVotacaoRepsitory sessaoVotacaoRepsitory;
 	private final PautaService PautaService;
+	private final AssociadoService associadoService;
 
 	@Override
 	public SessaoAberturaResponse abreSessao(SessaoAberturarequest sessaoRequest) {
@@ -37,7 +39,7 @@ public class SessaoVotacaoApplicationService implements SessaovotacaService {
 	public VotoResponse recebeVoto(UUID idSessao, VotoRequest novoVoto) {
 		log.info("[start] SessaoVotacaoApplicationService - recebeVoto");
 		SessaoVotacao sessao = sessaoVotacaoRepsitory.buscaSessaoPorId(idSessao);
-		VotoPauta voto = sessao.recebeVoto(novoVoto);
+		VotoPauta voto = sessao.recebeVoto(novoVoto, associadoService);
 		sessaoVotacaoRepsitory.salva(sessao);
 		log.info("[finish] SessaoVotacaoApplicationService - recebeVoto");
 		return new VotoResponse(voto);
