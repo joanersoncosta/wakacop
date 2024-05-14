@@ -1,7 +1,5 @@
 package academy.wakanda.wakacop.pauta.application.api;
 
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import academy.wakanda.wakacop.pauta.application.api.request.NovaPautaRequest;
 import academy.wakanda.wakacop.pauta.application.api.response.PautaCadastradaResponse;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/pauta")

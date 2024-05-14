@@ -19,20 +19,19 @@ public class PautaApplicationService implements PautaService {
 	
 	@Override
 	public PautaCadastradaResponse cadastraPauta(NovaPautaRequest novaPauta) {
-		log.info("[inicia] PautaApplicationService - cadastraPauta");
-		log.info("[novaPauta] {}", novaPauta);
+		log.debug("[inicia] PautaApplicationService - cadastraPauta");
+		log.debug("[novaPauta] {}", novaPauta);
 		Pauta pauta = pautaRepsitory.salva(new Pauta(novaPauta));
-		log.info("[finaliza] PautaApplicationService - cadastraPauta");
+		log.debug("[finaliza] PautaApplicationService - cadastraPauta");
 		return new PautaCadastradaResponse(pauta);
 	}
 
 	@Override
 	public Pauta getPautaPorId(UUID idPauta) {
-		log.info("[inicia] PautaApplicationService - getPautaPorId");
-		log.info("[idPauta] {}", idPauta);
+		log.debug("[inicia] PautaApplicationService - getPautaPorId");
+		log.debug("[idPauta] {}", idPauta);
 		Pauta pauta = pautaRepsitory.buscaPautaporId(idPauta);
-		log.info("[finaliza] PautaApplicationService - getPautaPorId");
+		log.debug("[finaliza] PautaApplicationService - getPautaPorId");
 		return pauta;
 	}
-
 }

@@ -21,27 +21,27 @@ public class SessaoVotacaoController implements SessaovotacaoAPI {
 	
 	@Override
 	public SessaoAberturaResponse abreSessao(SessaoAberturarequest sessaoRequest) {
-		log.info("[start] SessaoVotacaoController - abreSessao");
+		log.debug("[start] SessaoVotacaoController - abreSessao");
 		SessaoAberturaResponse sessaoAberturaResponse = sessaovotacaService.abreSessao(sessaoRequest);
-		log.info("[finish] SessaoVotacaoController - abreSessao");
+		log.debug("[finish] SessaoVotacaoController - abreSessao");
 		return sessaoAberturaResponse;
 	}
 
 	@Override
 	public VotoResponse recebeVoto(UUID idSessao, VotoRequest votoRequest) {
-		log.info("[start] SessaoVotacaoController - recebeVoto");
-		log.info("[idSessao] {}", idSessao);
+		log.debug("[start] SessaoVotacaoController - recebeVoto");
+		log.debug("[idSessao] {}", idSessao);
 		VotoResponse votoResponse = sessaovotacaService.recebeVoto(idSessao, votoRequest);
-		log.info("[finish] SessaoVotacaoController - recebeVoto");
+		log.debug("[finish] SessaoVotacaoController - recebeVoto");
 		return votoResponse;
 	}
 
 	@Override
 	public ResultadoSessaoVotacao obtemResultado(UUID idSessao) {
-		log.info("[start] SessaoVotacaoController - obtemResultado");
-		log.info("[idSessao] {}", idSessao);
+		log.debug("[start] SessaoVotacaoController - obtemResultado");
+		log.debug("[idSessao] {}", idSessao);
 		ResultadoSessaoVotacao resultadoSessaoVotacao = sessaovotacaService.obtemResultado(idSessao);
-		log.info("[finish] SessaoVotacaoController - obtemResultado");
+		log.debug("[finish] SessaoVotacaoController - obtemResultado");
 		return resultadoSessaoVotacao;
 	}
 }

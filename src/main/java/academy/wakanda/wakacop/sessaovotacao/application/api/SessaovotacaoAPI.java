@@ -2,8 +2,6 @@ package academy.wakanda.wakacop.sessaovotacao.application.api;
 
 import java.util.UUID;
 
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +16,7 @@ import academy.wakanda.wakacop.sessaovotacao.application.api.request.VotoRequest
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.ResultadoSessaoVotacao;
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.SessaoAberturaResponse;
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.VotoResponse;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/sessao")

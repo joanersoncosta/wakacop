@@ -17,18 +17,18 @@ public class PautaInfraRepository implements PautaRepsitory {
 
 	@Override
 	public Pauta salva(Pauta pauta) {
-		log.info("[start] PautaInfraRepository - salva");
+		log.debug("[start] PautaInfraRepository - salva");
 		pautaSpringDataJPARepository.save(pauta);
-		log.info("[finish] PautaInfraRepository - salva");
+		log.debug("[finish] PautaInfraRepository - salva");
 		return pauta;
 	}
 
 	@Override
 	public Pauta buscaPautaporId(UUID idPauta) {
-		log.info("[start] PautaInfraRepository - buscaPautaporId");
+		log.debug("[start] PautaInfraRepository - buscaPautaporId");
 		Pauta pauta = pautaSpringDataJPARepository.findById(idPauta)
 				.orElseThrow(() -> new RuntimeException("Pauta não encontrada!"));
-		log.info("[finish] PautaInfraRepository - buscaPautaporId");
+		log.debug("[finish] PautaInfraRepository - buscaPautaporId");
 		return pauta;
 	}
 

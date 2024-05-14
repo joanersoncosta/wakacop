@@ -28,30 +28,30 @@ public class SessaoVotacaoApplicationService implements SessaovotacaService {
 
 	@Override
 	public SessaoAberturaResponse abreSessao(SessaoAberturarequest sessaoRequest) {
-		log.info("[start] SessaoVotacaoApplicationService - abreSessao");
+		log.debug("[start] SessaoVotacaoApplicationService - abreSessao");
 		Pauta pauta = PautaService.getPautaPorId(sessaoRequest.getIdPauta());
 		SessaoVotacao sessaoVotacao = sessaoVotacaoRepsitory.salva(new SessaoVotacao(sessaoRequest, pauta));
-		log.info("[finish] SessaoVotacaoApplicationService - abreSessao");
+		log.debug("[finish] SessaoVotacaoApplicationService - abreSessao");
 		return new SessaoAberturaResponse(sessaoVotacao);
 	}
 
 	@Override
 	public VotoResponse recebeVoto(UUID idSessao, VotoRequest novoVoto) {
-		log.info("[start] SessaoVotacaoApplicationService - recebeVoto");
+		log.debug("[start] SessaoVotacaoApplicationService - recebeVoto");
 		SessaoVotacao sessao = sessaoVotacaoRepsitory.buscaSessaoPorId(idSessao);
 		VotoPauta voto = sessao.recebeVoto(novoVoto, associadoService);
 		sessaoVotacaoRepsitory.salva(sessao);
-		log.info("[finish] SessaoVotacaoApplicationService - recebeVoto");
+		log.debug("[finish] SessaoVotacaoApplicationService - recebeVoto");
 		return new VotoResponse(voto);
 	}
 
 	@Override
 	public ResultadoSessaoVotacao obtemResultado(UUID idSessao) {
-		log.info("[start] SessaoVotacaoApplicationService - obtemResultado");
+		log.debug("[start] SessaoVotacaoApplicationService - obtemResultado");
 		SessaoVotacao sessao = sessaoVotacaoRepsitory.buscaSessaoPorId(idSessao);
 		sessao.obtemResultado();
 		sessaoVotacaoRepsitory.salva(sessao);
-		log.info("[finish] SessaoVotacaoApplicationService - obtemResultado");
+		log.debug("[finish] SessaoVotacaoApplicationService - obtemResultado");
 		return new ResultadoSessaoVotacao(sessao);
 	}
 }
