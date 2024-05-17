@@ -19,6 +19,7 @@ public class AssociadoApplicationService implements AssociadoService {
 		log.debug("[start] AssociadoApplicationService - validaAssociadoAptoVoto");
 		ConcultaCpfResponse concultaCPFResponse = serproClientFeign.consultaCPF(TOKEN, cpfAssociado);
 		valida(concultaCPFResponse);
+		log.debug("[TOKEN] {}", TOKEN);
 		log.debug("[finish] AssociadoApplicationService - validaAssociadoAptoVoto");
 	}
 
