@@ -13,7 +13,7 @@ import academy.wakanda.wakacop.sessaovotacao.application.api.response.ResultadoS
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.SessaoAberturaResponse;
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.VotoResponse;
 import academy.wakanda.wakacop.sessaovotacao.application.repository.SessaoVotacaoRepsitory;
-import academy.wakanda.wakacop.sessaovotacao.domin.PublicaResultadoResponse;
+import academy.wakanda.wakacop.sessaovotacao.domin.PublicadorResultadoSessao;
 import academy.wakanda.wakacop.sessaovotacao.domin.SessaoVotacao;
 import academy.wakanda.wakacop.sessaovotacao.domin.VotoPauta;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class SessaoVotacaoApplicationService implements SessaovotacaService {
 	private final SessaoVotacaoRepsitory sessaoVotacaoRepsitory;
 	private final PautaService PautaService;
 	private final AssociadoService associadoService;
-	private final PublicaResultadoResponse publicaResultadoResponse;
+	private final PublicadorResultadoSessao publicaResultadoResponse;
 
 	@Override
 	public SessaoAberturaResponse abreSessao(SessaoAberturarequest sessaoRequest) {

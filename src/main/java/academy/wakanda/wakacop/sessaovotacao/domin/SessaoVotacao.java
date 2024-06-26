@@ -53,7 +53,7 @@ public class SessaoVotacao {
 		this.votos = new HashMap<>();
 	}
 	
-	public VotoPauta recebeVoto(VotoRequest votoRequest, AssociadoService associadoService, PublicaResultadoResponse publicaResultadoResponse) {
+	public VotoPauta recebeVoto(VotoRequest votoRequest, AssociadoService associadoService, PublicadorResultadoSessao publicaResultadoResponse) {
 		validaSessaoAberta(publicaResultadoResponse);
 		validaAssociado(votoRequest.getCpfAssociado(), associadoService);
 		VotoPauta voto = new VotoPauta(this, votoRequest);
@@ -61,14 +61,14 @@ public class SessaoVotacao {
 		return voto;
 	}
 
-	private void validaSessaoAberta(PublicaResultadoResponse publicaResultadoResponse) {
+	private void validaSessaoAberta(PublicadorResultadoSessao publicaResultadoResponse) {
 		atualizaStatus(publicaResultadoResponse);
 		if(this.status.equals(StatusSessaoVotacao.FECHADA)) {
 			throw new RuntimeException("Sessão está fechada!");
 		}
 	}
 
-	private void atualizaStatus(PublicaResultadoResponse publicaResultadoResponse) {
+	private void atualizaStatus(PublicadorResultadoSessao publicaResultadoResponse) {
 		if(this.status.equals(StatusSessaoVotacao.ABERTA)) {
 			if(LocalDateTime.now().isAfter(momentoEncerramento)) {
 				fechaSessao(publicaResultadoResponse);
@@ -76,7 +76,7 @@ public class SessaoVotacao {
 		}
 	}
 
-	private void fechaSessao(PublicaResultadoResponse publicaResultadoResponse) {
+	private void fechaSessao(PublicadorResultadoSessao publicaResultadoResponse) {
 		this.status = StatusSessaoVotacao.FECHADA;
 		publicaResultadoResponse.publica(new ResultadoSessaoVotacao(this));
 	}
@@ -92,7 +92,7 @@ public class SessaoVotacao {
 		}
 	}
 	
-	public ResultadoSessaoVotacao obtemResultado(PublicaResultadoResponse publicaResultadoResponse){
+	public ResultadoSessaoVotacao obtemResultado(PublicadorResultadoSessao publicaResultadoResponse){
 		atualizaStatus(publicaResultadoResponse);
 		return new ResultadoSessaoVotacao(this);
 	}

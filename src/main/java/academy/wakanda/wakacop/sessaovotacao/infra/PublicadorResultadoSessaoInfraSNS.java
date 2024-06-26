@@ -5,14 +5,14 @@ import org.springframework.stereotype.Component;
 
 import academy.wakanda.wakacop.config.AwsConfigProperties;
 import academy.wakanda.wakacop.sessaovotacao.application.api.response.ResultadoSessaoVotacao;
-import academy.wakanda.wakacop.sessaovotacao.domin.PublicaResultadoResponse;
+import academy.wakanda.wakacop.sessaovotacao.domin.PublicadorResultadoSessao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Component
 @RequiredArgsConstructor
 @Log4j2
-public class PublicadorResultadoSessaoInfraSNS implements PublicaResultadoResponse {
+public class PublicadorResultadoSessaoInfraSNS implements PublicadorResultadoSessao {
 	private final NotificationMessagingTemplate publicadorResultadoSNS;
     private final AwsConfigProperties awsSnsProperties;
 
