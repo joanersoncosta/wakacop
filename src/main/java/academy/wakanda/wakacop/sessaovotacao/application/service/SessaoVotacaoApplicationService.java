@@ -51,9 +51,9 @@ public class SessaoVotacaoApplicationService implements SessaovotacaService {
 	public ResultadoSessaoVotacao obtemResultado(UUID idSessao) {
 		log.debug("[start] SessaoVotacaoApplicationService - obtemResultado");
 		SessaoVotacao sessao = sessaoVotacaoRepsitory.buscaSessaoPorId(idSessao);
-		sessao.obtemResultado(publicaResultadoResponse);
+		ResultadoSessaoVotacao resultado = sessao.obtemResultado(publicaResultadoResponse);
 		sessaoVotacaoRepsitory.salva(sessao);
 		log.debug("[finish] SessaoVotacaoApplicationService - obtemResultado");
-		return new ResultadoSessaoVotacao(sessao);
+		return resultado;
 	}
 }

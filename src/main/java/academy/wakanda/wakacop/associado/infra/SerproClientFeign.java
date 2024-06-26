@@ -9,7 +9,7 @@ import academy.wakanda.wakacop.associado.infra.client.ConcultaCpfResponse;
 
 @FeignClient(name = "serproClientFeign", url = "https://gateway.apiserpro.serpro.gov.br/consulta-cpf-df-trial")
 public interface SerproClientFeign {
-	@GetMapping("/v1/cpf/{cpfAssociado}")
-	ConcultaCpfResponse consultaCPF(@RequestHeader(value = "Authorization") String authorization,
+	@GetMapping(path = "/v1/cpf/{cpfAssociado}")
+	ConcultaCpfResponse consultaCPF(@RequestHeader(value = "Authorization") String token,
 			@PathVariable String cpfAssociado);
 }

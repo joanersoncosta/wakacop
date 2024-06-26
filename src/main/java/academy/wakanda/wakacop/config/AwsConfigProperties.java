@@ -17,9 +17,9 @@ import lombok.ToString;
 @ConfigurationProperties(prefix = "aws.config")
 @ToString
 public class AwsConfigProperties {
-    private String region;
-    private String accesskey;
-    private String secretkey;
-    private String endpointuri;
-    private String resultadoSessaoTopic;
+	private String region;
+	private String accesskey;
+	private String secretkey;
+	private String endpointuri;
+	private String resultadoSessaoTopic;
 }

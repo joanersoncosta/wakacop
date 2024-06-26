@@ -27,16 +27,16 @@ spring:
       ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    properties:
+      properties:
         hibernate:
           default_schema: wakacop
-          
+
 cloud:
   aws:
     credentials:
       accessKey: ${AWS_SNS_ACCESS_KEY:teste}
       secretKey: ${AWS_SNS_SECRET_KEY:teste}
-      stack: false
+    #stack: false
     stack.auto: false
     region:
       auto: false

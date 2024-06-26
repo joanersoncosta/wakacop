@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import academy.wakanda.wakacop.sessaovotacao.domin.SessaoVotacao;
+import academy.wakanda.wakacop.sessaovotacao.domin.StatusSessaoVotacao;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -14,6 +15,7 @@ public class ResultadoSessaoVotacao {
 	private UUID idPauta;
 	private LocalDateTime momentoAbertura;
 	private LocalDateTime momentoEncerramento;
+	private StatusSessaoVotacao status;
 	private Long totalVotos;
 	private Long totalSim;
 	private Long totalNao;
@@ -23,6 +25,7 @@ public class ResultadoSessaoVotacao {
 		this.idPauta = sessao.getIdPauta();
 		this.momentoAbertura = sessao.getMomentoAbertura();
 		this.momentoEncerramento = sessao.getMomentoEncerramento();
+		this.status = sessao.getStatus();
 		this.totalVotos = sessao.getTotalVotos();
 		this.totalSim = sessao.getTotalSim();
 		this.totalNao = sessao.getTotalNao();
