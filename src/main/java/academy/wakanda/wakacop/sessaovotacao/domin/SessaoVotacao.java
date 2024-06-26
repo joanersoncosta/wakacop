@@ -19,6 +19,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MapKey;
 import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -27,6 +29,8 @@ import lombok.ToString;
 @Entity
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@Builder(access = AccessLevel.PACKAGE)
 public class SessaoVotacao {
 
 	@Id
@@ -68,7 +72,7 @@ public class SessaoVotacao {
 		}
 	}
 
-	private void atualizaStatus(PublicadorResultadoSessao publicaResultadoResponse) {
+	void atualizaStatus(PublicadorResultadoSessao publicaResultadoResponse) {
 		if(this.status.equals(StatusSessaoVotacao.ABERTA)) {
 			if(LocalDateTime.now().isAfter(momentoEncerramento)) {
 				fechaSessao(publicaResultadoResponse);
@@ -76,7 +80,7 @@ public class SessaoVotacao {
 		}
 	}
 
-	private void fechaSessao(PublicadorResultadoSessao publicaResultadoResponse) {
+	void fechaSessao(PublicadorResultadoSessao publicaResultadoResponse) {
 		this.status = StatusSessaoVotacao.FECHADA;
 		publicaResultadoResponse.publica(new ResultadoSessaoVotacao(this));
 	}
