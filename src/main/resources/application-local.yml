@@ -1,3 +1,6 @@
 app:
   aws:
+    accesskey: teste
+    secretkey: teste
+    region: us-east-1   
     endpoint-override: http://localhost:4566
